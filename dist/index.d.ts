@@ -51,7 +51,7 @@ type ActionCallback = (action: EventType, move: EventArgs) => void;
 /**
  * 绘制状态
  */
-type Status = 'INIT' | 'START' | 'PAUSE' | 'DESTROY';
+type Status = "INIT" | "START" | "PAUSE" | "DESTROY";
 interface DrawOption {
     /**
      * @desc 是否使用地形，当开启时需要浏览器支持地形选取功能，如果不支持将会被关闭
@@ -75,6 +75,7 @@ interface DrawOption {
      */
     action?: ActionCallback;
     sameStyle: boolean;
+    disableTooltips?: boolean;
     /** 自定义编辑时鼠标移动的提示 */
     tips: {
         /** 默认为 'Click to draw' */
@@ -89,7 +90,7 @@ type StartOption = {
     /**
      * @desc 勾画类型 目前支持 Polygon、Line、Point、Circle、Rectangle
      */
-    type: 'POLYGON' | 'POLYLINE' | 'POINT' | 'CIRCLE' | 'RECTANGLE';
+    type: "POLYGON" | "POLYLINE" | "POINT" | "CIRCLE" | "RECTANGLE";
     /**
      * 是否只勾画一次，如果设为true，则在第一勾画结束时停止
      * @default undefined
@@ -110,7 +111,7 @@ type StartOption = {
     /**
      * 点改变的回调
      */
-    onPointsChange?: BasicGraphicesOptions['onPointsChange'];
+    onPointsChange?: BasicGraphicesOptions["onPointsChange"];
     /** 结束绘制的回调 */
     onEnd?: (entity: Entity, positions: Cartesian3[]) => void;
 };
@@ -125,6 +126,7 @@ declare class Drawer {
     private _status;
     private _painter;
     private _events;
+    private _disableTooltips;
     private _typeClass;
     private _option;
     private $Instance;

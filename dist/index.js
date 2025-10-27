@@ -420,6 +420,7 @@ class Drawer {
   _status;
   _painter;
   _events = [];
+  _disableTooltips;
   _typeClass;
   _option;
   $Instance;
@@ -456,6 +457,7 @@ class Drawer {
       model: (options == null ? void 0 : options.model) ?? defaultOptions.model,
       operateType: (options == null ? void 0 : options.operateType) ?? defaultOptions.operateType,
       sameStyle: (options == null ? void 0 : options.sameStyle) ?? true,
+      disableTooltips: (options == null ? void 0 : options.disableTooltips) ?? false,
       dynamicGraphicsOptions: (options == null ? void 0 : options.dynamicGraphicsOptions) ?? defaultOptions.dynamicGraphicsOptions,
       tips: (options == null ? void 0 : options.tips) ?? defaultOptions.tips
     };
@@ -469,6 +471,7 @@ class Drawer {
     this._model = this._option.model ?? defaultOptions.model;
     this._action = this._option.action;
     this._sameStyle = (options == null ? void 0 : options.sameStyle) ?? true;
+    this._disableTooltips = this._option.disableTooltips ?? false;
     this._tips = {
       ...defaultOptions.tips,
       ...options == null ? void 0 : options.tips
@@ -513,6 +516,7 @@ class Drawer {
   }
   _updateTips() {
     if (!this._painter) return;
+    if (this._disableTooltips) return;
     if (this._status === "INIT" || this._status === "DESTROY") {
       this.mouseTooltip.enabled = false;
       return;

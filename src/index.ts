@@ -83,6 +83,8 @@ export default class Drawer {
 
   private _events: string[] = [];
 
+  private _disableTooltips: boolean;
+
   private _typeClass!: Line | Polygon | Point | Rectangle | Circle;
 
   private _option: DrawOption;
@@ -136,6 +138,7 @@ export default class Drawer {
       model: options?.model ?? defaultOptions.model,
       operateType: options?.operateType ?? defaultOptions.operateType,
       sameStyle: options?.sameStyle ?? true,
+      disableTooltips: options?.disableTooltips ?? false,
       dynamicGraphicsOptions:
         options?.dynamicGraphicsOptions ??
         defaultOptions.dynamicGraphicsOptions,
@@ -157,6 +160,8 @@ export default class Drawer {
     this._action = this._option.action;
 
     this._sameStyle = options?.sameStyle ?? true;
+
+    this._disableTooltips = this._option.disableTooltips ?? false;
 
     this._tips = {
       ...defaultOptions.tips,
@@ -215,6 +220,7 @@ export default class Drawer {
 
   private _updateTips() {
     if (!this._painter) return;
+    if (this._disableTooltips) return;
     if (this._status === "INIT" || this._status === "DESTROY") {
       this.mouseTooltip.enabled = false;
       return;
