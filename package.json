@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omt-tech/cesium-drawer.git",
+    "url": "git+https://github.com/fsievolution/cesium-drawer.git",
     "directory": "packages/drawer"
   },
   "scripts": {
